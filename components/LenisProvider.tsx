@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactLenis } from '@darkroom.engineering/react-lenis';
+import { ReactLenis } from 'lenis/react';
 import gsap from 'gsap';
 import { useEffect, useRef } from 'react';
 
