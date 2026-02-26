@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
-    "@studio-freight/react-lenis": "^0.0.47",
+    "@darkroom.engineering/react-lenis": "1.0.45",
     "clsx": "^2.1.1",
     "gsap": "^3.14.2",
-    "lenis": "^1.3.17",
+    "lenis": "1.1.18",
     "lucide-react": "^0.575.0",
     "next": "16.1.6",
     "react": "19.2.3",
