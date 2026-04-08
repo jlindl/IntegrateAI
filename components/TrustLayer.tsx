@@ -3,9 +3,24 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Hexagon, Triangle, CircleDashed, Square, Diamond, Box } from "lucide-react";
+import { 
+    SiGmail, SiWhatsapp, SiHubspot, SiN8N, SiGooglecloud,
+    SiSlack, SiSalesforce, SiZapier, SiOpenai, SiNotion, SiStripe
+} from "react-icons/si";
 
-gsap.registerPlugin(ScrollTrigger);
+// Custom GoHighLevel Icon Shape
+const GoHighLevelIcon = ({ size = 28, className = "" }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+        <path d="M4.5 19.5L12 4.5l3.5 7h4v4h-5L12 11l-4.5 9h-3z" />
+    </svg>
+);
+
+// Custom Monday.com Icon Shape
+const MondayIcon = ({ size = 28, className = "" }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+        <path d="M12 5.5A2.5 2.5 0 0 0 9.5 8v8A2.5 2.5 0 0 0 12 18.5a2.5 2.5 0 0 0 2.5-2.5V8A2.5 2.5 0 0 0 12 5.5z M5.5 8.5A2.5 2.5 0 0 0 3 11v5a2.5 2.5 0 0 0 5 0v-5A2.5 2.5 0 0 0 5.5 8.5z M18.5 8.5A2.5 2.5 0 0 0 16 11v5a2.5 2.5 0 0 0 5 0v-5A2.5 2.5 0 0 0 18.5 8.5z" />
+    </svg>
+);
 
 const METRICS_DATA = [
     { id: 1, label: "Avg. Client ROI", value: 300, suffix: "%+", desc: "Year over year efficiency returns" },
@@ -15,12 +30,19 @@ const METRICS_DATA = [
 ];
 
 const LOGOS = [
-    { icon: Hexagon, name: "Axiom" },
-    { icon: Triangle, name: "Vertex" },
-    { icon: CircleDashed, name: "Nexus" },
-    { icon: Square, name: "Block" },
-    { icon: Diamond, name: "Quarry" },
-    { icon: Box, name: "Crate" },
+    { icon: GoHighLevelIcon, name: "GoHighLevel" },
+    { icon: SiGmail, name: "Gmail" },
+    { icon: SiWhatsapp, name: "WhatsApp" },
+    { icon: SiHubspot, name: "HubSpot" },
+    { icon: MondayIcon, name: "Monday.com" },
+    { icon: SiN8N, name: "n8n" },
+    { icon: SiGooglecloud, name: "Google Cloud" },
+    { icon: SiSlack, name: "Slack" },
+    { icon: SiSalesforce, name: "Salesforce" },
+    { icon: SiZapier, name: "Zapier" },
+    { icon: SiOpenai, name: "OpenAI" },
+    { icon: SiNotion, name: "Notion" },
+    { icon: SiStripe, name: "Stripe" }
 ];
 
 export default function TrustLayer() {
@@ -100,10 +122,10 @@ export default function TrustLayer() {
                 {/* Header */}
                 <span className="trust-header-elem font-mono text-xs text-metallic uppercase tracking-[0.2em] mb-4 flex items-center justify-center gap-2">
                     <span className="w-1.5 h-1.5 bg-signal rounded-full shadow-[0_0_10px_rgba(255,255,255,0.8)]"></span>
-                    Verified Partners
+                    Supported Ecosystems
                 </span>
                 <h2 className="trust-header-elem text-3xl md:text-5xl font-serif text-signal mb-16 md:mb-24">
-                    Trusted by industry <span className="metallic-gradient-text italic font-bold">leaders.</span>
+                    Infinite <span className="metallic-gradient-text italic font-bold">integrations.</span>
                 </h2>
 
                 {/* Logo Marquee */}
@@ -112,8 +134,8 @@ export default function TrustLayer() {
                         {/* Quadrupled for seamless hardware-accelerated looping */}
                         {[...LOGOS, ...LOGOS, ...LOGOS, ...LOGOS].map((logo, i) => (
                             <div key={i} className="flex flex-1 items-center justify-center gap-3 opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300 transform-gpu cursor-default">
-                                <logo.icon size={28} className="text-metallic" />
-                                <span className="font-sans font-bold text-xl md:text-2xl tracking-wider text-metallic">{logo.name}</span>
+                                <logo.icon size={28} className="text-metallic shrink-0" />
+                                <span className="font-sans font-bold text-xl md:text-2xl tracking-wider text-metallic whitespace-nowrap">{logo.name}</span>
                             </div>
                         ))}
                     </div>

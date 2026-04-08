@@ -203,12 +203,16 @@ export default function SpecialtiesArchive() {
                     >
                         <div className="w-full max-w-lg flex flex-col gap-10">
                             <div className="space-y-3">
-                                <h3 className="text-xl font-semibold text-white tracking-tight">Omnichannel Outreach Architecture</h3>
+                                <h3 className="text-xl font-semibold text-white tracking-tight">Automated Lead Generation Infrastructure</h3>
                                 <p className="text-metallic text-sm leading-relaxed max-w-md">
-                                    Scalable outbound systems that stay full automatically — networked across cold email infrastructure, conversational AI, and instant messaging APIs.
+                                    A scalable outbound engine that continuously sources, engages, and qualifies prospects across multiple channels.
                                 </p>
                                 <ul className="space-y-2 pt-2">
-                                    {["Domain-warmed cold email servers", "Conversational WhatsApp AI agents", "Two-way SMS drip sequences"].map((item) => (
+                                    {[
+                                        "Deliverability-optimised cold email systems",
+                                        "AI WhatsApp agents that convert conversations into leads",
+                                        "Intelligent SMS sequences that follow up and book calls"
+                                    ].map((item) => (
                                         <li key={item} className="flex items-center gap-3 text-sm text-metallic">
                                             <div className="w-1 h-1 rounded-full bg-white shrink-0" />
                                             {item}

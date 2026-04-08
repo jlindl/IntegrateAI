@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -125,7 +126,7 @@ export default function Hero() {
 
                     {/* CTAs */}
                     <div className="hero-text flex flex-col sm:flex-row items-center gap-6">
-                        <button className="group relative px-10 py-5 bg-signal text-[#030405] rounded-sm font-sans text-sm font-bold tracking-widest uppercase overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] skew-x-[-5deg]">
+                        <Link href="/contact" className="group relative px-10 py-5 bg-signal text-[#030405] rounded-sm font-sans text-sm font-bold tracking-widest uppercase overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] skew-x-[-5deg] inline-flex">
                             <span className="relative z-10 flex items-center gap-3 skew-x-[5deg]">
                                 Book a Strategy Call
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter" className="group-hover:translate-x-1 transition-transform">
@@ -134,7 +135,7 @@ export default function Hero() {
                                 </svg>
                             </span>
                             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-black/10 to-transparent group-hover:translate-x-full transition-transform duration-[600ms] ease-in-out" />
-                        </button>
+                        </Link>
 
                         <button className="group px-8 py-5 bg-transparent text-signal rounded-sm border border-metallic/30 font-sans text-sm font-semibold tracking-widest uppercase transition-all duration-300 hover:bg-[#0a0c0e] hover:border-signal/50 skew-x-[-5deg]">
                             <span className="inline-block skew-x-[5deg]">See What We Build →</span>

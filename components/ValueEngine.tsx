@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 import { Network, Cpu, Link as LinkIcon } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -124,8 +125,8 @@ export default function ValueEngine() {
                         <p className="text-metallic font-sans text-lg max-w-md leading-relaxed">
                             We partner with ambitious teams to replace inefficient manual processes with intelligent, custom-built AI architectures.
                         </p>
-                        <a
-                            href="#"
+                        <Link
+                            href="/contact"
                             className="mt-8 group inline-flex items-center gap-3 px-8 py-3.5 bg-white/5 text-signal border border-white/10 rounded-sm font-sans text-sm font-semibold tracking-widest uppercase transition-all duration-300 hover:bg-white/10 hover:border-white/25 skew-x-[-5deg]"
                         >
                             <span className="skew-x-[5deg] flex items-center gap-2">
@@ -134,7 +135,7 @@ export default function ValueEngine() {
                                     <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                                 </svg>
                             </span>
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="flex flex-col gap-[35vh]">

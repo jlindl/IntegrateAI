@@ -191,8 +191,8 @@ export default function ExplodedView() {
                 </div>
 
                 {/* Right Side: The 3D Stack */}
-                <div ref={stackRef} className="w-full md:w-2/3 h-[500px] flex items-center justify-center translate-x-12">
-                    <div className="relative w-[500px] h-[350px]">
+                <div ref={stackRef} className="w-full md:w-2/3 h-[600px] flex items-center justify-center translate-x-6 md:translate-x-16">
+                    <div className="relative w-[600px] h-[420px] md:w-[700px] md:h-[480px]">
 
                         {/* Layer 3: Infrastructure (Bottom) */}
                         <div ref={dataLayerRef} className="absolute inset-0 bg-[#0a0c0e] border border-white/5 rounded-2xl shadow-2xl p-6 flex flex-col justify-between">
@@ -254,10 +254,10 @@ export default function ExplodedView() {
                             {/* Real Website Mockup using Image */}
                             <div className="relative flex-1 w-full bg-[#0a0c0e]">
                                 <Image
-                                    src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=2670&auto=format&fit=crop"
+                                    src="/dashboard-cool.png"
                                     alt="High-end dashboard UI"
                                     fill
-                                    className="object-cover object-top opacity-80 mix-blend-screen"
+                                    className="object-cover object-top opacity-90 mix-blend-screen"
                                 />
                                 {/* Ambient glow over the UI */}
                                 <div className="absolute inset-0 bg-gradient-to-tr from-signal/10 to-transparent mix-blend-overlay"></div>

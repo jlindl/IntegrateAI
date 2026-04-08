@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, Code, LayoutDashboard } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -36,24 +37,13 @@ export default function WebDesignHero() {
             );
 
             // 3. Staggered cinematic text reveal (Line by Line / Word by Word)
-            if (textRef.current) {
-                const words = textRef.current.innerText.split(" ");
-                textRef.current.innerHTML = "";
-                words.forEach(word => {
-                    const span = document.createElement("span");
-                    span.innerText = word + " ";
-                    span.className = "inline-block opacity-0 translate-y-8 tracking-tight";
-                    textRef.current?.appendChild(span);
-                });
-
-                tl.to(textRef.current.children, {
-                    y: 0,
-                    opacity: 1,
-                    stagger: 0.08,
-                    duration: 1.2,
-                    ease: "back.out(1.4)",
-                }, "-=1.8");
-            }
+            tl.to(".hero-word", {
+                y: 0,
+                opacity: 1,
+                stagger: 0.1,
+                duration: 1.4,
+                ease: "power4.out",
+            }, "-=1.8");
 
             // 4. Fade in subtext and UI elements
             tl.fromTo(
@@ -69,15 +59,14 @@ export default function WebDesignHero() {
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top top",
-                    end: "bottom top",
-                    scrub: 1,
+                    end: "+=100%",
+                    scrub: 1.5,
                     pin: true,
-                    pinSpacing: false, // Prevents creating empty space below so the next section overlaps
+                    pinSpacing: false,
                 },
-                scale: 0.85,
+                scale: 0.9,
                 opacity: 0,
-                filter: "blur(10px)",
-                duration: 1,
+                filter: "blur(15px)",
                 ease: "power2.inOut"
             });
 
@@ -95,18 +84,18 @@ export default function WebDesignHero() {
                     src="/image.png"
                     alt="Abstract Web Design"
                     fill
-                    className="hero-bg object-cover object-[70%_50%] origin-center mix-blend-luminosity grayscale opacity-60 pointer-events-none"
+                    className="hero-bg object-cover object-[85%_50%] origin-center mix-blend-luminosity grayscale opacity-50 pointer-events-none"
                     priority
                 />
                 {/* Complex gradients to focus the left side */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#030405] via-[#030405]/80 to-transparent w-[80%]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030405] via-transparent to-[#030405]/40" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#030405] via-[#030405]/95 to-transparent w-full z-[1]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030405] via-transparent to-[#030405]/40 z-[2]" />
             </div>
 
             {/* Left-Aligned Content Container */}
             <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col justify-center h-full pt-16">
 
-                <div className="max-w-2xl">
+                <div className="max-w-3xl">
                     {/* Top Accent & Label */}
                     <div className="fade-up-element flex items-center gap-4 mb-8">
                         <div className="accent-line h-px w-12 bg-signal origin-left" />
@@ -116,9 +105,15 @@ export default function WebDesignHero() {
                     </div>
 
                     {/* Highly Cinematic Headline */}
-                    <h1 ref={textRef} className="text-5xl md:text-7xl lg:text-[5.5rem] font-serif text-white leading-[1.05] tracking-tight mb-8 drop-shadow-2xl">
-                        Engineering your <br />
-                        <span className="metallic-gradient-text italic font-bold">digital presence.</span>
+                    <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-serif text-white leading-[1.15] tracking-tight mb-10 drop-shadow-2xl flex flex-col gap-2 overflow-visible">
+                        <div className="flex flex-wrap gap-x-6 overflow-visible">
+                            <span className="hero-word block opacity-0 translate-y-8 pb-2">Engineering</span>
+                            <span className="hero-word block opacity-0 translate-y-8 pb-2">your</span>
+                        </div>
+                        <div className="flex flex-wrap gap-x-6 overflow-visible">
+                            <span className="hero-word block opacity-0 translate-y-8 metallic-gradient-text italic font-bold pb-2 pr-6">digital</span>
+                            <span className="hero-word block opacity-0 translate-y-8 metallic-gradient-text italic font-bold pb-2 pr-6">presence.</span>
+                        </div>
                     </h1>
 
                     {/* Subtext */}
@@ -128,13 +123,13 @@ export default function WebDesignHero() {
 
                     {/* Interactive UI Block */}
                     <div className="fade-up-element flex flex-col sm:flex-row items-center gap-6">
-                        <button className="group relative px-10 py-5 bg-signal text-[#030405] rounded-sm font-sans text-sm font-bold tracking-widest uppercase overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] skew-x-[-5deg] w-full sm:w-auto text-center justify-center">
+                        <Link href="/contact" className="group relative px-10 py-5 bg-signal text-[#030405] rounded-sm font-sans text-sm font-bold tracking-widest uppercase overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] skew-x-[-5deg] w-full sm:w-auto text-center flex justify-center">
                             <span className="relative z-10 flex items-center justify-center gap-3 skew-x-[5deg]">
                                 Start a Project
                                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                             </span>
                             <div className="absolute inset-0 -translate-x-[150%] skew-x-[20deg] bg-gradient-to-r from-transparent via-black/20 to-transparent group-hover:translate-x-[150%] transition-transform duration-[800ms] ease-in-out" />
-                        </button>
+                        </Link>
 
                         <div className="flex gap-4 opacity-70">
                             <div className="flex items-center gap-2 font-mono text-xs text-metallic bg-white/5 border border-white/10 px-4 py-2 rounded-full backdrop-blur-md">

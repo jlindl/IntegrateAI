@@ -1,17 +1,19 @@
 import Link from "next/link";
-import { Command } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
     return (
-        <footer className="relative w-full bg-[#030405] text-signal rounded-t-[4rem] z-40 overflow-hidden pb-12 pt-24 px-6 md:px-12 mt-[-4rem]">
+        <footer className="relative w-full bg-[#16191E] text-signal rounded-t-[4rem] z-40 overflow-hidden pb-12 pt-24 px-6 md:px-12 mt-[-4rem]">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-16 relative z-10">
 
                 <div className="flex flex-col gap-6 max-w-sm">
-                    <Link href="/" className="flex items-center gap-2 text-signal hover:text-metallic transition-colors">
-                        <Command size={24} className="text-accent-glow" />
-                        <span className="font-serif font-semibold text-2xl tracking-tight">Integrate</span>
+                    <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                        <div className="relative w-10 h-10 rounded-sm overflow-hidden flex items-center justify-center">
+                            <Image src="/logo.png" alt="Integrate Logo" fill className="object-contain" />
+                        </div>
+                        <span className="text-signal font-sans font-bold text-xl tracking-wide uppercase skew-x-[-5deg]">Integrate</span>
                     </Link>
                     <p className="text-metallic font-sans tracking-wide leading-relaxed text-sm">
                         Premium AI Automation Agency. We design, build, and maintain bespoke AI architectures tailored to your exact operational logic.
