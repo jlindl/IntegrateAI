@@ -222,37 +222,63 @@ export default function SpecialtiesArchive() {
                             </div>
 
                             {/* Architecture Diagram */}
-                            <div className="relative w-full rounded-xl border border-white/5 bg-deep-carbon/60 overflow-hidden p-8">
-                                <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-                                <div className="relative z-10 flex flex-col items-center gap-0">
+                            <div className="relative w-full min-h-[440px] py-10 rounded-2xl border border-white/10 bg-[#0a0c0e]/80 shadow-[0_0_50px_rgba(255,255,255,0.03)] overflow-hidden px-8 flex items-center justify-center -skew-x-[2deg]">
+                                <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+                                {/* Ambient Glow */}
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-white/5 blur-[60px] rounded-full point-events-none" />
+
+                                <div className="relative z-10 w-full max-w-md flex flex-col items-center gap-0">
                                     {/* Channel nodes */}
-                                    <div className="flex justify-between w-full max-w-xs">
-                                        {[{ icon: Mail, label: "EMAIL" }, { icon: MessageSquare, label: "SMS/WA" }, { icon: Bot, label: "AI AGENT" }].map(({ icon: Icon, label }) => (
-                                            <div key={label} className="flex flex-col items-center gap-1.5">
-                                                <div className="w-9 h-9 rounded-lg bg-graphite border border-white/10 flex items-center justify-center">
-                                                    <Icon className="w-3.5 h-3.5 text-metallic" />
+                                    <div className="flex justify-between w-full">
+                                        {[{ icon: Mail, label: "COLD_EMAIL", status: "bg-emerald-500" }, { icon: MessageSquare, label: "WHATSAPP", status: "bg-emerald-500" }, { icon: Bot, label: "AI_AGENT", status: "bg-amber-500" }].map(({ icon: Icon, label, status }) => (
+                                            <div key={label} className="relative flex flex-col items-center gap-3">
+                                                <div className="relative w-14 h-14 rounded-xl bg-gradient-to-b from-white/10 to-transparent border border-white/20 flex items-center justify-center backdrop-blur-md shadow-lg animate-pulse-glow" style={{ animationDelay: `${Math.random()}s` }}>
+                                                    <div className={`absolute -top-1.5 -right-1.5 w-3 h-3 rounded-full ${status} border-2 border-[#0a0c0e]`} />
+                                                    <Icon className="w-6 h-6 text-white" />
                                                 </div>
-                                                <span className="text-[8px] font-mono text-metallic/60 tracking-widest">{label}</span>
+                                                <div className="flex flex-col items-center">
+                                                    <span className="text-[10px] font-mono text-white tracking-[0.2em]">{label}</span>
+                                                    <span className="text-[8px] font-mono text-metallic/40">NODE_VOL: HIGH</span>
+                                                </div>
                                             </div>
                                         ))}
                                     </div>
-                                    {/* Converging lines */}
-                                    <div className="flex justify-between w-full max-w-xs px-5 relative mt-1">
-                                        <div className="h-7 w-[1px] bg-gradient-to-b from-white/15 to-white/40 self-end rotate-[20deg] origin-top translate-x-2" />
-                                        <div className="h-7 w-[1px] bg-gradient-to-b from-white/15 to-white/40" />
-                                        <div className="h-7 w-[1px] bg-gradient-to-b from-white/15 to-white/40 self-end -rotate-[20deg] origin-top -translate-x-2" />
+
+                                    {/* Converging animated lines */}
+                                    <div className="flex justify-between w-full px-6 relative mt-4 h-16">
+                                        {/* Left Line */}
+                                        <div className="relative w-px h-full bg-white/10 origin-top rotate-[25deg] translate-x-4 overflow-hidden">
+                                            <div className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-transparent via-white to-transparent animate-data-flow" style={{ animationDuration: '1.5s' }} />
+                                        </div>
+                                        {/* Center Line */}
+                                        <div className="relative w-px h-full bg-white/10 overflow-hidden">
+                                            <div className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-transparent via-white to-transparent animate-data-flow" style={{ animationDuration: '2s' }} />
+                                        </div>
+                                        {/* Right Line */}
+                                        <div className="relative w-px h-full bg-white/10 origin-top -rotate-[25deg] -translate-x-4 overflow-hidden">
+                                            <div className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-transparent via-white to-transparent animate-data-flow" style={{ animationDuration: '1.2s' }} />
+                                        </div>
                                     </div>
-                                    {/* Engine pill */}
-                                    <div className="flex items-center gap-2.5 px-5 py-2.5 border border-white/15 rounded-full bg-white/[0.04] mt-0">
-                                        <Activity className="w-3.5 h-3.5 text-white" />
-                                        <span className="text-[10px] font-mono text-white tracking-[0.15em]">OUTBOUND_ENGINE</span>
+
+                                    {/* Engine Core */}
+                                    <div className="relative flex items-center gap-4 px-8 py-4 border border-white/30 rounded-2xl bg-white/[0.05] backdrop-blur-xl shadow-[0_0_30px_rgba(255,255,255,0.1)] z-20 overflow-hidden">
+                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-data-flow-x" style={{ animationDuration: '3s' }} />
+                                        <Activity className="w-5 h-5 text-white animate-pulse" />
+                                        <div className="flex flex-col">
+                                            <span className="text-xs font-mono text-white tracking-[0.2em] font-bold">OUTBOUND_ENGINE</span>
+                                            <span className="text-[9px] font-mono text-metallic">PROCESSING QUEUE...</span>
+                                        </div>
                                     </div>
+
                                     {/* Output line */}
-                                    <div className="h-5 w-[1px] bg-gradient-to-b from-white/40 to-white/10 mt-0" />
+                                    <div className="relative w-px h-10 bg-white/10 mt-0 overflow-hidden">
+                                        <div className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-transparent via-white to-transparent animate-data-flow" style={{ animationDuration: '1s' }} />
+                                    </div>
+
                                     {/* CRM pill */}
-                                    <div className="flex items-center gap-2.5 px-5 py-2.5 border border-white/10 rounded-full bg-white/[0.02]">
-                                        <Database className="w-3 h-3 text-metallic" />
-                                        <span className="text-[10px] font-mono text-metallic tracking-[0.15em]">CRM / PIPELINE</span>
+                                    <div className="flex items-center gap-3 px-6 py-3 border border-white/10 rounded-xl bg-black/50 backdrop-blur-md">
+                                        <Database className="w-4 h-4 text-metallic" />
+                                        <span className="text-[10px] font-mono text-metallic tracking-[0.2em]">CRM_SYNC_COMPLETE</span>
                                     </div>
                                 </div>
                             </div>
@@ -281,28 +307,44 @@ export default function SpecialtiesArchive() {
                             </div>
 
                             {/* Automation Flow Diagram */}
-                            <div className="relative w-full rounded-xl border border-white/5 bg-deep-carbon/60 overflow-hidden p-8">
-                                <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-                                <div className="relative z-10 flex flex-col items-center gap-3">
+                            <div className="relative w-full min-h-[440px] py-10 rounded-2xl border border-white/10 bg-[#0a0c0e]/80 shadow-[0_0_50px_rgba(255,255,255,0.03)] overflow-hidden flex flex-col justify-center items-center skew-x-[2deg]">
+                                <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+                                {/* Ambient Glow */}
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 blur-[80px] rounded-full pointer-events-none" />
+
+                                <div className="relative z-10 flex flex-col gap-0 w-full px-8 max-w-sm mx-auto">
                                     {/* Flow steps */}
                                     {[
-                                        { icon: Zap, label: "TRIGGER", sub: "New lead / form fill" },
-                                        { icon: Bot, label: "AI TRIAGE", sub: "Score & categorise" },
-                                        { icon: Database, label: "CRM SYNC", sub: "Update & enrich" },
-                                        { icon: CreditCard, label: "INVOICE", sub: "Auto-generate & send" },
-                                    ].map(({ icon: Icon, label, sub }, idx, arr) => (
-                                        <div key={label} className="flex flex-col items-center w-full">
-                                            <div className="flex items-center gap-3 w-full max-w-xs">
-                                                <div className="w-8 h-8 rounded-lg bg-graphite border border-white/10 flex items-center justify-center shrink-0">
-                                                    <Icon className="w-3.5 h-3.5 text-metallic" />
+                                        { icon: Zap, label: "WEBHOOK_TRIGGER", status: "PENDING" },
+                                        { icon: Bot, label: "AI_TRIAGE_AGENT", status: "PROCESSING", pulse: true },
+                                        { icon: Database, label: "CRM_MUTATION", status: "AWAITING" },
+                                        { icon: CreditCard, label: "INV_GENERATION", status: "AWAITING" },
+                                    ].map(({ icon: Icon, label, status, pulse }, idx, arr) => (
+                                        <div key={label} className="flex flex-col w-full relative">
+                                            <div className={`flex items-center gap-4 w-full p-3 rounded-xl border ${pulse ? 'border-white/30 bg-white/10 shadow-[0_0_20px_rgba(255,255,255,0.1)]' : 'border-white/5 bg-black/40'} backdrop-blur-md transition-all duration-500`}>
+                                                <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${pulse ? 'bg-white text-black' : 'bg-white/5 text-metallic border border-white/10'}`}>
+                                                    <Icon className="w-4 h-4" />
                                                 </div>
-                                                <div className="flex flex-col">
-                                                    <span className="text-[9px] font-mono text-white tracking-widest">{label}</span>
-                                                    <span className="text-[9px] font-mono text-metallic/50">{sub}</span>
+                                                <div className="flex flex-col flex-1">
+                                                    <span className={`text-[10px] font-mono tracking-widest ${pulse ? 'text-white font-bold' : 'text-metallic'}`}>{label}</span>
+                                                    <div className="flex items-center gap-2 mt-1">
+                                                        {pulse && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />}
+                                                        <span className="text-[8px] font-mono text-metallic/40">{status}</span>
+                                                    </div>
                                                 </div>
+                                                {pulse && (
+                                                    <div className="h-full flex items-center pr-2">
+                                                        <Activity className="w-4 h-4 text-emerald-400 animate-pulse" />
+                                                    </div>
+                                                )}
                                             </div>
+                                            {/* Connector line */}
                                             {idx < arr.length - 1 && (
-                                                <div className="h-4 w-[1px] bg-gradient-to-b from-white/30 to-white/10 my-0.5" />
+                                                <div className="relative h-6 w-px bg-white/10 ml-8 overflow-hidden">
+                                                    {pulse && (
+                                                        <div className="absolute top-0 left-0 w-full h-[50%] bg-gradient-to-b from-transparent via-white to-transparent animate-data-flow" style={{ animationDuration: '0.8s' }} />
+                                                    )}
+                                                </div>
                                             )}
                                         </div>
                                     ))}
@@ -333,23 +375,30 @@ export default function SpecialtiesArchive() {
                             </div>
 
                             {/* Stack Diagram */}
-                            <div className="relative w-full rounded-xl border border-white/5 bg-deep-carbon/60 overflow-hidden p-8">
-                                <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-                                <div className="relative z-10 flex flex-col gap-3">
-                                    {/* Stack layers */}
+                            <div className="relative w-full min-h-[440px] py-10 rounded-2xl border border-white/10 bg-[#0a0c0e]/80 shadow-[0_0_50px_rgba(255,255,255,0.03)] overflow-hidden px-8 flex flex-col justify-center items-center">
+                                <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+                                {/* Ambient Glow */}
+                                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 blur-[80px] rounded-full pointer-events-none" />
+
+                                <div className="relative z-10 flex flex-col gap-1 w-full max-w-md">
+                                    {/* Stack layers with isometric simulation & depth */}
                                     {[
-                                        { icon: Globe, layer: "FRONTEND", desc: "Next.js · Framer · GSAP", border: "border-white/20" },
-                                        { icon: Code2, layer: "API LAYER", desc: "tRPC · REST · GraphQL", border: "border-white/10" },
-                                        { icon: Database, layer: "DATA", desc: "Postgres · Supabase · Prisma", border: "border-white/8" },
-                                        { icon: Layers, layer: "INFRA", desc: "Vercel · AWS · Cloudflare", border: "border-white/5" },
-                                    ].map(({ icon: Icon, layer, desc, border }) => (
-                                        <div key={layer} className={`flex items-center gap-3 px-4 py-3 rounded-lg border ${border} bg-white/[0.02]`}>
-                                            <div className="w-7 h-7 rounded-md bg-graphite border border-white/10 flex items-center justify-center shrink-0">
-                                                <Icon className="w-3 h-3 text-metallic" />
+                                        { icon: Globe, layer: "FRONTEND_UI", desc: "Next.js · Framer · GSAP", active: true, z: "z-40", translateY: "translate-y-0" },
+                                        { icon: Code2, layer: "API_GATEWAY", desc: "tRPC · REST · GraphQL", active: false, z: "z-30", translateY: "-translate-y-2 scale-[0.98]" },
+                                        { icon: Database, layer: "DATA_LAYER", desc: "Postgres · Supabase · Prisma", active: false, z: "z-20", translateY: "-translate-y-4 scale-[0.96]" },
+                                        { icon: Layers, layer: "INFRASTRUCTURE", desc: "Vercel · AWS · Cloudflare", active: false, z: "z-10", translateY: "-translate-y-6 scale-[0.94]" },
+                                    ].map(({ icon: Icon, layer, desc, active, z, translateY }) => (
+                                        <div key={layer} className={`relative flex items-center gap-4 px-6 py-4 rounded-xl border ${active ? 'border-white/40 bg-white/10 shadow-[0_10px_30px_rgba(255,255,255,0.05)]' : 'border-white/10 bg-black/60 shadow-[0_10px_20px_rgba(0,0,0,0.5)]'} backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-white/30 cursor-crosshair ${z} ${translateY}`}>
+                                            {active && <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-data-flow-x" style={{ animationDuration: '3s' }} />}
+                                            <div className={`w-12 h-12 rounded-lg flex items-center justify-center shrink-0 ${active ? 'bg-white text-black' : 'bg-white/5 border border-white/10 text-metallic'}`}>
+                                                <Icon className="w-5 h-5" />
                                             </div>
                                             <div className="flex flex-col">
-                                                <span className="text-[9px] font-mono text-white tracking-widest">{layer}</span>
-                                                <span className="text-[9px] font-mono text-metallic/50">{desc}</span>
+                                                <div className="flex items-center gap-2">
+                                                    <span className={`text-[10px] font-mono tracking-widest ${active ? 'text-white font-bold' : 'text-metallic'}`}>{layer}</span>
+                                                    {active && <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse shadow-[0_0_10px_rgba(96,165,250,0.8)]" />}
+                                                </div>
+                                                <span className={`text-[9px] font-mono mt-0.5 ${active ? 'text-white/70' : 'text-metallic/40'}`}>{desc}</span>
                                             </div>
                                         </div>
                                     ))}

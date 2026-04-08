@@ -49,7 +49,7 @@ export default function ServicesCarousel() {
     const displayServices = [...SERVICES, ...SERVICES, ...SERVICES];
 
     return (
-        <section ref={marqueeRef} className="relative w-full py-16 bg-deep-carbon overflow-hidden border-y border-metallic/5">
+        <section ref={marqueeRef} className="relative w-full py-16 bg-deep-carbon overflow-hidden border-y border-metallic/5 z-10">
             <div className="absolute inset-0 bg-gradient-to-r from-deep-carbon via-transparent to-deep-carbon z-10 pointer-events-none w-full h-full" />
 
             <div className="max-w-7xl mx-auto px-6 mb-10 flex justify-center">
@@ -58,7 +58,7 @@ export default function ServicesCarousel() {
                 </span>
             </div>
 
-            <div className="relative w-full overflow-hidden flex whitespace-nowrap mask-image-linear">
+            <div className="relative w-full overflow-hidden flex whitespace-nowrap mask-image-linear py-6">
                 <div
                     ref={contentRef}
                     className="flex w-fit items-center flex-nowrap"
@@ -68,7 +68,7 @@ export default function ServicesCarousel() {
                             key={`${service}-${index}`}
                             className="flex items-center px-8 md:px-12"
                         >
-                            <span className="text-3xl md:text-5xl font-sans font-medium text-metallic/40 hover:text-signal transition-colors duration-500 cursor-default">
+                            <span className="text-3xl md:text-5xl font-sans font-medium text-metallic/40 hover:text-signal transition-colors duration-500 cursor-default leading-normal pb-2">
                                 {service}
                             </span>
                             {/* Optional separator dot if desired between items, removed to strictly match image inspiration which relies on spacing */}

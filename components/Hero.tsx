@@ -57,20 +57,31 @@ export default function Hero() {
                 ease: "none",
             });
 
-            // 2. Content wrapper fades, blurs, and slides up to create depth
-            gsap.to(".hero-content-wrapper", {
+            // 2. STICKY OVERLAP EFFECT
+            // Pin the entire section while the next section scrolls over it
+            ScrollTrigger.create({
+                trigger: containerRef.current,
+                start: "top top",
+                end: "bottom top", // Pin for exactly 1 viewport height
+                pin: true,
+                pinSpacing: false, // This is key: the next section will overlap
+                scrub: true,
+            });
+
+            // 3. RECEDING DEPTH ANIMATION
+            // As the user scrolls, the hero content recedes (fades and blurs)
+            gsap.to(".hero-content-wrapper, .hero-bg-wrapper", {
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top top",
                     end: "bottom top",
                     scrub: true,
                 },
-                y: -150,
-                opacity: 0,
-                scale: 0.95,
-                filter: "blur(10px)",
+                opacity: 0.1,
+                filter: "blur(15px)",
+                y: -100, // Slight upward drift for parallax feel
+                scale: 0.9,
                 ease: "none",
-                force3D: true,
             });
 
         }, containerRef);
@@ -81,7 +92,7 @@ export default function Hero() {
     return (
         <section
             ref={containerRef}
-            className="relative w-full h-[100dvh] flex items-center justify-start overflow-hidden bg-[#030405]"
+            className="hero-section relative w-full h-[100dvh] flex items-center justify-start overflow-hidden bg-[#030405] z-0"
         >
             <div className="hero-bg-wrapper absolute inset-0 z-0 opacity-70 mix-blend-screen overflow-hidden will-change-transform transform-gpu">
                 {/* Abstract geometric metallic environment */}
@@ -129,10 +140,11 @@ export default function Hero() {
                         <Link href="/contact" className="group relative px-10 py-5 bg-signal text-[#030405] rounded-sm font-sans text-sm font-bold tracking-widest uppercase overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] skew-x-[-5deg] inline-flex">
                             <span className="relative z-10 flex items-center gap-3 skew-x-[5deg]">
                                 Book a Strategy Call
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter" className="group-hover:translate-x-1 transition-transform">
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                    <polyline points="12 5 19 12 12 19"></polyline>
-                                </svg>
+                                <div className="relative w-5 h-5 flex items-center justify-center">
+                                    <div className="absolute w-10 h-10 transition-transform group-hover:scale-110 group-hover:rotate-12">
+                                        <Image src="/logo.png" alt="Logo" fill className="object-contain" />
+                                    </div>
+                                </div>
                             </span>
                             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-black/10 to-transparent group-hover:translate-x-full transition-transform duration-[600ms] ease-in-out" />
                         </Link>

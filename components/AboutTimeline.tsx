@@ -9,40 +9,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 const MILESTONES = [
     {
-        year: "2022",
+        year: "Q1 2025",
         phase: "Chapter .01",
-        title: "The Founding",
+        title: "The Genesis",
         description:
-            "Started in a garage with a single conviction: the best AI isn't the flashiest — it's the one that disappears into your workflow. Two engineers, one mission, zero funding.",
+            "Integrate was founded with a single conviction: enterprise AI is broken. We set out to build the architecture that bridges the gap between raw LLMs and mission-critical ops.",
         image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2670&auto=format&fit=crop",
         imageAlt: "Startup workspace",
     },
     {
-        year: "2023",
+        year: "Q2 2025",
         phase: "Chapter .02",
-        title: "First Enterprise Deal",
+        title: "Building the Core",
         description:
-            "Our first B2B client saw a 340% ROI in 90 days. Word spread. Teams started calling. We went from two engineers to a full operations squad practically overnight.",
+            "Formalized our first 3 custom agent frameworks. We focused on speed to deployment and vertical-specific logic for high-growth B2B companies.",
         image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2670&auto=format&fit=crop",
-        imageAlt: "Enterprise meeting",
-    },
-    {
-        year: "2024",
-        phase: "Chapter .03",
-        title: "The AI Pivot",
-        description:
-            "We doubled down on agentic AI — building autonomous systems that don't just execute, they reason. Custom RAG pipelines, multi-agent orchestration, real-time decisioning at scale.",
-        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2665&auto=format&fit=crop",
-        imageAlt: "AI visualization",
+        imageAlt: "Engineering development",
     },
     {
         year: "Now",
-        phase: "Chapter .04",
-        title: "Building What's Next",
+        phase: "Chapter .03",
+        title: "The Pioneer Cohort",
         description:
-            "Today we operate as a precision AI automation agency — partnering with high-growth B2B companies to architect the systems that will define the next decade of their operations.",
-        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2672&auto=format&fit=crop",
-        imageAlt: "Future technology",
+            "Today we are scaling with our first dozen enterprise partners, battle-testing multi-agent orchestration and refining the systems that will define the next decade of automation.",
+        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2665&auto=format&fit=crop",
+        imageAlt: "AI visualization",
     },
 ];
 

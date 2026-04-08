@@ -15,21 +15,21 @@ const MODULE_DATA = [
         title: "Workflow Automation",
         icon: Network,
         desc: "Stop wasting time on manual data entry. We engineer custom workflows that reclaim thousands of hours for your organization.",
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop" // Dashboard/Analytics
+        image: "/workflow_ui.png" 
     },
     {
         id: "MOD_02",
         title: "Bespoke AI Agents",
         icon: Cpu,
         desc: "Every agent is custom-trained for your business. We map directly to your standard operating procedures and scale them indefinitely.",
-        image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2670&auto=format&fit=crop" // Code on dark screen
+        image: "/agent_ui.png" 
     },
     {
         id: "MOD_03",
         title: "System Integration",
         icon: LinkIcon,
         desc: "Seamlessly connected. We bridge your entire tech stack, ensuring your data flows freely between platforms without manual intervention.",
-        image: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=2670&auto=format&fit=crop" // Network / Cyber Security Nodes
+        image: "/integration_ui.png" 
     }
 ];
 
@@ -105,7 +105,7 @@ export default function ValueEngine() {
                                 src={mod.image}
                                 alt={mod.title}
                                 fill
-                                className="feature-img object-cover opacity-0 grayscale contrast-[1.1] mix-blend-luminosity brightness-75 will-change-transform will-change-[opacity] transform-gpu"
+                                className="feature-img object-cover opacity-0 grayscale-[0.3] contrast-[1.1] brightness-[0.8] hover:grayscale-0 hover:brightness-100 transition-all duration-700 ease-out will-change-transform will-change-[opacity] transform-gpu"
                                 priority={i === 0}
                             />
                         ))}
@@ -160,7 +160,7 @@ export default function ValueEngine() {
                                         src={mod.image}
                                         alt={mod.title}
                                         fill
-                                        className="object-cover grayscale contrast-[1.1] mix-blend-luminosity brightness-75"
+                                        className="object-cover grayscale-[0.3] contrast-[1.1] brightness-[0.8]"
                                     />
                                 </div>
                             </div>

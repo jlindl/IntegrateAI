@@ -7,9 +7,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const STATS = [
-    { label: "Founded", value: 2022, suffix: "" },
-    { label: "Projects Delivered", value: 80, suffix: "+" },
-    { label: "Hours Automated", value: 120, suffix: "k+" },
+    { label: "Founded", value: 2025, suffix: "" },
+    { label: "Pioneer Cohort", value: 12, suffix: "+" },
+    { label: "Efficiency Gain", value: 45, suffix: "%+" },
 ];
 
 export default function AboutMission() {

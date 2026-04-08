@@ -13,13 +13,15 @@ export default function Home() {
     <main className="min-h-screen bg-deep-carbon text-signal selection:bg-signal/30 selection:text-signal font-sans overflow-clip">
       <Navbar />
       <Hero />
-      <ServicesCarousel />
-      <SpecialtiesArchive />
-      <ValueEngine />
-      <TrustLayer />
-      <Process />
-      <CTAZone />
-      <Footer />
+      <div className="relative z-10 bg-deep-carbon">
+        <ServicesCarousel />
+        <SpecialtiesArchive />
+        <ValueEngine />
+        <TrustLayer />
+        <Process />
+        <CTAZone />
+        <Footer />
+      </div>
     </main>
   );
 }

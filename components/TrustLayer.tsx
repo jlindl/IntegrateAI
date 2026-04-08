@@ -23,10 +23,10 @@ const MondayIcon = ({ size = 28, className = "" }) => (
 );
 
 const METRICS_DATA = [
-    { id: 1, label: "Avg. Client ROI", value: 300, suffix: "%+", desc: "Year over year efficiency returns" },
-    { id: 2, label: "Agents Deployed", value: 50, suffix: "+", desc: "Across operations, sales, and support" },
-    { id: 3, label: "Hours Saved", value: 120, suffix: "k+", desc: "Reclaimed man-hours annually" },
-    { id: 4, label: "Avg. Delivery", prefix: "< ", value: 14, suffix: "d", desc: "To initial system deployment" },
+    { id: 1, label: "Pioneer ROI", value: 240, suffix: "%+", desc: "Average returns across early adopters" },
+    { id: 2, label: "Custom Agents", value: 16, suffix: "+", desc: "Engineered for the Pioneer Cohort" },
+    { id: 3, label: "Initial Time Reclaimed", value: 8500, suffix: "+", desc: "Man-hours optimized to date" },
+    { id: 4, label: "Avg. Deployment", prefix: "< ", value: 14, suffix: "d", desc: "To initial system go-live" },
 ];
 
 const LOGOS = [

@@ -44,6 +44,10 @@ export default function Navbar() {
                     <Link href="/case-studies" className="hover:text-signal transition-colors skew-x-[-5deg]">
                         Case Studies
                     </Link>
+                    
+                    <Link href="/insights" className="hover:text-signal transition-colors skew-x-[-5deg]">
+                        Insights
+                    </Link>
                 </div>
 
                 <Link href="/contact" className="group relative px-6 py-2.5 bg-signal text-[#030405] rounded-sm font-sans text-xs font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.04] shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] skew-x-[-5deg]">
