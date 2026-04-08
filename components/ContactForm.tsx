@@ -45,6 +45,7 @@ export default function ContactForm() {
         role: "",
         websiteUrl: "",
         hasNoWebsite: false,
+        phone: "",
         service: "",
         bottleneck: "",
         aiExperience: "",
@@ -95,7 +96,7 @@ export default function ContactForm() {
             e.preventDefault();
 
             // Validation per step before Enter works
-            if (step === 0 && formData.name && formData.email.includes('@')) nextStep();
+            if (step === 0 && formData.name && formData.email.includes('@') && formData.phone) nextStep();
             if (step === 1 && formData.businessName && formData.industry && formData.role && (formData.websiteUrl || formData.hasNoWebsite)) nextStep();
             if (step === 2 && formData.service && formData.bottleneck) nextStep();
             if (step === 3 && formData.aiExperience && formData.successVision) nextStep();
@@ -103,10 +104,23 @@ export default function ContactForm() {
         }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setIsSubmitting(true);
-        // Simulate API call
-        setTimeout(() => {
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || "Integration failed");
+            }
+
+            const data = await response.json();
+            console.log("Lead captured:", data);
+            
             setIsSubmitting(false);
             setStep(5);
 
@@ -115,7 +129,11 @@ export default function ContactForm() {
                 { scale: 0, rotation: -45 },
                 { scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.7)" }
             );
-        }, 1500);
+        } catch (error) {
+            console.error("Submission error:", error);
+            setIsSubmitting(false);
+            alert("Protocol transmission failed. Please try again or contact us directly.");
+        }
     };
 
     // Calculate progress (5 steps total before success, so denominator is 4)
@@ -204,11 +222,22 @@ export default function ContactForm() {
                                         className="w-full bg-transparent border-b-2 border-white/10 hover:border-white/30 focus:border-signal text-white text-xl px-12 py-4 outline-none transition-colors placeholder:text-white/20"
                                     />
                                 </div>
+                                <div className="relative">
+                                    <Clock className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={20} />
+                                    <input
+                                        type="tel"
+                                        value={formData.phone}
+                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                        onKeyDown={handleKeyDown}
+                                        placeholder="Phone Number"
+                                        className="w-full bg-transparent border-b-2 border-white/10 hover:border-white/30 focus:border-signal text-white text-xl px-12 py-4 outline-none transition-colors placeholder:text-white/20"
+                                    />
+                                </div>
                             </div>
                             <div className="flex justify-center mt-6">
                                 <button
                                     onClick={nextStep}
-                                    disabled={!formData.name || !formData.email.includes('@')}
+                                    disabled={!formData.name || !formData.email.includes('@') || !formData.phone}
                                     className="group relative px-8 py-3.5 bg-white text-[#030405] rounded-full font-sans text-sm font-bold overflow-hidden transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] disabled:opacity-30 disabled:hover:scale-100"
                                 >
                                     <span className="relative z-10 flex items-center gap-2">
