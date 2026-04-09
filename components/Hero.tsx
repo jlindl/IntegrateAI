@@ -97,10 +97,10 @@ export default function Hero() {
             <div className="hero-bg-wrapper absolute inset-0 z-0 opacity-70 mix-blend-screen overflow-hidden will-change-transform transform-gpu">
                 {/* Abstract geometric metallic environment */}
                 <Image
-                    src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
-                    alt="Abstract metallic environment"
+                    src="/hero_bg.png"
+                    alt="Abstract minimalist metallic environment"
                     fill
-                    className="hero-bg object-cover object-center opacity-30 mix-blend-screen grayscale contrast-125"
+                    className="hero-bg object-cover object-center opacity-40 mix-blend-lighten grayscale contrast-110"
                     priority
                 />
                 {/* Dark Vignette Gradients */}
