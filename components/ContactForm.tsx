@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
-import { ArrowRight, CheckCircle2, Bot, Layout, Briefcase, Mail, User, ShieldCheck, Building2, Globe, Target, Clock, DollarSign, BrainCircuit, ChevronDown, Calendar } from "lucide-react";
+import { ArrowRight, CheckCircle2, Bot, Layout, Briefcase, Mail, User, ShieldCheck, Building2, Globe, Target, Clock, DollarSign, BrainCircuit, ChevronDown, Calendar, AlertCircle, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -55,6 +55,8 @@ export default function ContactForm() {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [errorDetails, setErrorDetails] = useState<string | null>(null);
 
     const containerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -106,6 +108,9 @@ export default function ContactForm() {
 
     const handleSubmit = async () => {
         setIsSubmitting(true);
+        setError(null);
+        setErrorDetails(null);
+
         try {
             const response = await fetch("/api/contact", {
                 method: "POST",
@@ -113,12 +118,37 @@ export default function ContactForm() {
                 body: JSON.stringify(formData),
             });
 
+            const data = await response.json();
+
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || "Integration failed");
+                // Determine if it's a specific known error
+                let errorMsg = data.error || "Integration failed";
+                let detailsMsg = null;
+
+                if (response.status === 500 && data.error === "Configuration Error") {
+                    errorMsg = "System Configuration Incomplete";
+                    detailsMsg = "Critical integration parameters are missing on our end.";
+                } else if (response.status >= 500) {
+                    errorMsg = "Server Transmission Error";
+                    detailsMsg = "The secure bridge is currently unresponsive. Please try again.";
+                } else if (response.status === 400) {
+                    errorMsg = "Protocol Validation Failed";
+                    // If GHL sends specific message, like "email is invalid"
+                    detailsMsg = data.details?.message || data.details?.error || "Some data fields didn't pass our validation checks.";
+                }
+
+                setError(errorMsg);
+                setErrorDetails(detailsMsg);
+                setIsSubmitting(false);
+                
+                // Error entrance animation
+                gsap.fromTo(".error-card",
+                    { y: 20, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }
+                );
+                return;
             }
 
-            const data = await response.json();
             console.log("Lead captured:", data);
             
             setIsSubmitting(false);
@@ -129,10 +159,18 @@ export default function ContactForm() {
                 { scale: 0, rotation: -45 },
                 { scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.7)" }
             );
-        } catch (error) {
-            console.error("Submission error:", error);
+        } catch (err: any) {
+            console.error("Submission error:", err);
             setIsSubmitting(false);
-            alert("Protocol transmission failed. Please try again or contact us directly.");
+            
+            setError("Protocol transmission failed.");
+            setErrorDetails("Check your network connection or try again later.");
+
+            // Error entrance animation
+            gsap.fromTo(".error-card",
+                { y: 20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }
+            );
         }
     };
 
@@ -514,23 +552,50 @@ export default function ContactForm() {
                                 </div>
                             </div>
 
-                            <div className="flex justify-between items-center mt-8 pt-6 border-t border-white/5">
-                                <button
-                                    onClick={prevStep}
-                                    className="group flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/40 hover:text-white transition-colors p-2 -ml-2"
-                                >
-                                    <ArrowRight size={14} className="rotate-180 group-hover:-translate-x-1 transition-transform" /> Back
-                                </button>
-                                <button
-                                    onClick={handleSubmit}
-                                    disabled={!formData.timeframe || isSubmitting}
-                                    className="group relative px-8 py-4 bg-signal text-black rounded-full font-sans text-sm font-bold overflow-hidden transition-all duration-400 hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] disabled:opacity-50 disabled:hover:scale-100"
-                                >
-                                    <span className="relative z-10 flex items-center gap-2">
-                                        {isSubmitting ? "Transmitting..." : "Finish and book call"}
-                                        {!isSubmitting && <CheckCircle2 size={16} className="group-hover:scale-110 transition-transform" />}
-                                    </span>
-                                </button>
+                            <div className="flex flex-col gap-6 mt-8 pt-6 border-t border-white/5">
+                                {error && (
+                                    <div className="error-card bg-red-500/5 border border-red-500/20 rounded-2xl p-4 flex items-start gap-4 backdrop-blur-md">
+                                        <div className="p-2 bg-red-500/10 rounded-full shrink-0">
+                                            <AlertCircle size={18} className="text-red-400" />
+                                        </div>
+                                        <div className="flex-1">
+                                            <h4 className="text-sm font-bold text-red-200 font-mono tracking-tight uppercase">
+                                                {error}
+                                            </h4>
+                                            {errorDetails && (
+                                                <p className="text-xs text-red-100/40 mt-1 font-sans leading-relaxed">
+                                                    {errorDetails}
+                                                </p>
+                                            )}
+                                        </div>
+                                        <button 
+                                            onClick={() => setError(null)}
+                                            className="text-red-400/40 hover:text-red-400 transition-colors"
+                                        >
+                                            <RefreshCw size={14} />
+                                        </button>
+                                    </div>
+                                )}
+
+                                <div className="flex justify-between items-center">
+                                    <button
+                                        onClick={prevStep}
+                                        disabled={isSubmitting}
+                                        className="group flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/40 hover:text-white transition-colors p-2 -ml-2 disabled:opacity-20"
+                                    >
+                                        <ArrowRight size={14} className="rotate-180 group-hover:-translate-x-1 transition-transform" /> Back
+                                    </button>
+                                    <button
+                                        onClick={handleSubmit}
+                                        disabled={!formData.timeframe || isSubmitting}
+                                        className={`group relative px-8 py-4 rounded-full font-sans text-sm font-bold overflow-hidden transition-all duration-400 hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] disabled:opacity-50 disabled:hover:scale-100 ${error ? 'bg-white/5 border border-white/10 text-white hover:bg-white/10' : 'bg-signal text-black'}`}
+                                    >
+                                        <span className="relative z-10 flex items-center gap-2">
+                                            {isSubmitting ? "Transmitting..." : error ? "Retry Submission" : "Finish and book call"}
+                                            {!isSubmitting && (error ? <RefreshCw size={16} /> : <CheckCircle2 size={16} className="group-hover:scale-110 transition-transform" />)}
+                                        </span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )}
