@@ -11,10 +11,10 @@ gsap.registerPlugin(ScrollTrigger);
 const SOCIALS = [
     {
         name: "LinkedIn",
-        handle: "@integrate-solutions",
+        handle: "@integrate-tech",
         description: "B2B insights, automation case studies, and engineering updates.",
         icon: <Linkedin size={32} />,
-        href: "https://linkedin.com/company/integrate-solutions",
+        href: "https://linkedin.com/company/integrate-tech",
         color: "hover:text-[#0077B5]",
     },
     {
@@ -22,7 +22,7 @@ const SOCIALS = [
         handle: "Direct Connect",
         description: "Instant access to our strategy team for ongoing project support.",
         icon: <MessageCircle size={32} />,
-        href: "https://wa.me/yourlink",
+        href: "https://wa.me/447361591339",
         color: "hover:text-[#25D366]",
     },
     {
@@ -35,10 +35,10 @@ const SOCIALS = [
     },
     {
         name: "Instagram",
-        handle: "@integrate.ops",
+        handle: "@integrate_tech",
         description: "Behind-the-scenes look at our digital architecture and design process.",
         icon: <Instagram size={32} />,
-        href: "https://instagram.com/integrate.ops",
+        href: "https://www.instagram.com/integrate_tech/",
         color: "hover:text-[#E4405F]",
     },
 ];

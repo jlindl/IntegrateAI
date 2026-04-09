@@ -97,7 +97,7 @@ export default function LinksPage() {
                     </div>
                     <div className="link-item w-full flex justify-center">
                         <LinkButton 
-                            href="https://linkedin.com/company/integrate-solutions" 
+                            href="https://linkedin.com/company/integrate-tech" 
                             icon={<Linkedin size={24} />} 
                             label="LinkedIn Profile" 
                             isExternal 
@@ -106,7 +106,7 @@ export default function LinksPage() {
                     </div>
                     <div className="link-item w-full flex justify-center">
                         <LinkButton 
-                            href="https://wa.me/yourwhatsapplink" 
+                            href="https://wa.me/447361591339" 
                             icon={<MessageCircle size={24} />} 
                             label="WhatsApp Us" 
                             isExternal 
