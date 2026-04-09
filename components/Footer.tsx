@@ -23,16 +23,17 @@ export default function Footer() {
                 <div className="flex flex-col gap-8 md:text-right w-full md:w-auto">
                     <div className="grid grid-cols-2 gap-8 md:gap-24">
                         <div className="flex flex-col gap-4 text-left md:text-right">
-                            <span className="font-mono text-[10px] text-accent-glow uppercase tracking-widest mb-2 opacity-80">Agency</span>
-                            <Link href="#engine" className="text-metallic hover:text-signal transition-colors text-sm">Services</Link>
-                            <Link href="#process" className="text-metallic hover:text-signal transition-colors text-sm">Case Studies</Link>
-                            <Link href="#process" className="text-metallic hover:text-signal transition-colors text-sm">Our Process</Link>
+                            <span className="font-mono text-[10px] text-accent-glow uppercase tracking-widest mb-2 opacity-80">Platform</span>
+                            <Link href="/web-design" className="text-metallic hover:text-signal transition-colors text-sm">Capabilities</Link>
+                            <Link href="/case-studies" className="text-metallic hover:text-signal transition-colors text-sm">Case Studies</Link>
+                            <Link href="/insights" className="text-metallic hover:text-signal transition-colors text-sm">Insights</Link>
+                            <Link href="/about" className="text-metallic hover:text-signal transition-colors text-sm">About Us</Link>
                         </div>
                         <div className="flex flex-col gap-4 text-left md:text-right">
                             <span className="font-mono text-[10px] text-accent-glow uppercase tracking-widest mb-2 opacity-80">Connect</span>
-                            <Link href="#" className="text-metallic hover:text-signal transition-colors text-sm">Client Portal</Link>
-                            <Link href="#" className="text-metallic hover:text-signal transition-colors text-sm">Careers</Link>
-                            <Link href="#" className="text-metallic hover:text-signal transition-colors text-sm">Contact Us</Link>
+                            <Link href="/contact" className="text-metallic hover:text-signal transition-colors text-sm">Contact Us</Link>
+                            <Link href="/book" className="text-metallic hover:text-signal transition-colors text-sm">Book Strategy</Link>
+                            <Link href="/links" className="text-metallic hover:text-signal transition-colors text-sm">Social Hub</Link>
                         </div>
                     </div>
                 </div>
