@@ -4,14 +4,9 @@ export async function POST(req: Request) {
     try {
         const body = await req.json();
         const { 
-            name, email, phone, businessName, industry, role, websiteUrl, 
+            firstName, lastName, email, phone, businessName, industry, role, websiteUrl, 
             service, bottleneck, aiExperience, successVision, timeframe, budget 
         } = body;
-
-        // Split name into First and Last
-        const nameParts = name.trim().split(" ");
-        const firstName = nameParts[0];
-        const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
 
         const API_KEY = process.env.GHL_API_KEY;
         const LOCATION_ID = process.env.GHL_LOCATION_ID;

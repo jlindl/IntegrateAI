@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import { ArrowRight, CheckCircle2, Bot, Layout, Briefcase, Mail, User, ShieldCheck, Building2, Globe, Target, Clock, DollarSign, BrainCircuit, ChevronDown, Calendar, AlertCircle, RefreshCw } from "lucide-react";
 import Link from "next/link";
@@ -38,7 +39,8 @@ const BUDGET_OPTIONS = [
 export default function ContactForm() {
     const [step, setStep] = useState<Step>(0);
     const [formData, setFormData] = useState({
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         businessName: "",
         industry: "",
@@ -57,6 +59,9 @@ export default function ContactForm() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [errorDetails, setErrorDetails] = useState<string | null>(null);
+    const [contactId, setContactId] = useState<string | null>(null);
+    
+    const router = useRouter();
 
     const containerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -98,7 +103,7 @@ export default function ContactForm() {
             e.preventDefault();
 
             // Validation per step before Enter works
-            if (step === 0 && formData.name && formData.email.includes('@') && formData.phone) nextStep();
+            if (step === 0 && formData.firstName && formData.lastName && formData.email.includes('@') && formData.phone) nextStep();
             if (step === 1 && formData.businessName && formData.industry && formData.role && (formData.websiteUrl || formData.hasNoWebsite)) nextStep();
             if (step === 2 && formData.service && formData.bottleneck) nextStep();
             if (step === 3 && formData.aiExperience && formData.successVision) nextStep();
@@ -151,6 +156,14 @@ export default function ContactForm() {
 
             console.log("Lead captured:", data);
             
+            if (data.contactId) {
+                setContactId(data.contactId);
+                // Optional: Short delay before redirect or show success then redirect
+                setTimeout(() => {
+                    router.push(`/book?contactId=${data.contactId}&name=${encodeURIComponent(formData.firstName)}`);
+                }, 2500);
+            }
+            
             setIsSubmitting(false);
             setStep(5);
 
@@ -163,8 +176,8 @@ export default function ContactForm() {
             console.error("Submission error:", err);
             setIsSubmitting(false);
             
-            setError("Protocol transmission failed.");
-            setErrorDetails("Check your network connection or try again later.");
+            setError("Communication gap detected.");
+            setErrorDetails("We're having trouble reaching our servers. Please check your connection.");
 
             // Error entrance animation
             gsap.fromTo(".error-card",
@@ -196,7 +209,7 @@ export default function ContactForm() {
             {/* Navbar back link */}
             <div className="absolute top-8 left-8 z-50">
                 <Link href="/" className="text-white/50 hover:text-white transition-colors font-mono text-xs tracking-widest uppercase flex items-center gap-2">
-                    <ArrowRight size={14} className="rotate-180" /> Back to Base
+                    <ArrowRight size={14} className="rotate-180" /> Back home
                 </Link>
             </div>
 
@@ -222,7 +235,7 @@ export default function ContactForm() {
 
                         <div className="inline-flex items-center gap-2 font-mono text-[10px] tracking-widest text-white/30 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
                             <ShieldCheck size={12} className="text-signal/70" />
-                            Secure Intake Protocol | Step {step + 1}/5
+                            Getting Started | Step {step + 1}/5
                         </div>
                     </div>
                 )}
@@ -234,20 +247,33 @@ export default function ContactForm() {
                     {step === 0 && (
                         <div className="flex flex-col gap-8 w-full">
                             <h2 className="text-3xl md:text-5xl font-serif text-white tracking-tight leading-tight text-center mb-4">
-                                Let&apos;s get acquainted.<br />Who are we speaking with?
+                                Nice to meet you.<br />What&apos;s your name?
                             </h2>
                             <div className="flex flex-col gap-6 max-w-md mx-auto w-full">
-                                <div className="relative">
-                                    <User className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={20} />
-                                    <input
-                                        type="text"
-                                        autoFocus
-                                        value={formData.name}
-                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        onKeyDown={handleKeyDown}
-                                        placeholder="Full Name"
-                                        className="w-full bg-transparent border-b-2 border-white/10 hover:border-white/30 focus:border-signal text-white text-xl px-12 py-4 outline-none transition-colors placeholder:text-white/20"
-                                    />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="relative">
+                                        <User className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={18} />
+                                        <input
+                                            type="text"
+                                            autoFocus
+                                            value={formData.firstName}
+                                            onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                                            onKeyDown={handleKeyDown}
+                                            placeholder="First Name"
+                                            className="w-full bg-transparent border-b-2 border-white/10 hover:border-white/30 focus:border-signal text-white text-lg px-12 py-4 outline-none transition-colors placeholder:text-white/20"
+                                        />
+                                    </div>
+                                    <div className="relative">
+                                        <User className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={18} />
+                                        <input
+                                            type="text"
+                                            value={formData.lastName}
+                                            onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                                            onKeyDown={handleKeyDown}
+                                            placeholder="Last Name"
+                                            className="w-full bg-transparent border-b-2 border-white/10 hover:border-white/30 focus:border-signal text-white text-lg px-12 py-4 outline-none transition-colors placeholder:text-white/20"
+                                        />
+                                    </div>
                                 </div>
                                 <div className="relative">
                                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={20} />
@@ -275,7 +301,7 @@ export default function ContactForm() {
                             <div className="flex justify-center mt-6">
                                 <button
                                     onClick={nextStep}
-                                    disabled={!formData.name || !formData.email.includes('@') || !formData.phone}
+                                    disabled={!formData.firstName || !formData.lastName || !formData.email.includes('@') || !formData.phone}
                                     className="group relative px-8 py-3.5 bg-white text-[#030405] rounded-full font-sans text-sm font-bold overflow-hidden transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] disabled:opacity-30 disabled:hover:scale-100"
                                 >
                                     <span className="relative z-10 flex items-center gap-2">
@@ -290,7 +316,7 @@ export default function ContactForm() {
                     {step === 1 && (
                         <div className="flex flex-col gap-8 w-full">
                             <h2 className="text-3xl md:text-4xl font-serif text-white tracking-tight leading-tight text-center mb-2">
-                                Tell us about your organization.
+                                Tell us a bit about your business.
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                                 <div className="space-y-6">
@@ -380,7 +406,7 @@ export default function ContactForm() {
                     {step === 2 && (
                         <div className="flex flex-col gap-6 w-full">
                             <h2 className="text-3xl font-serif text-white tracking-tight leading-tight mb-2">
-                                What brings you to Integrate?
+                                What can we help you with?
                             </h2>
 
                             <div className="space-y-2">
@@ -430,7 +456,7 @@ export default function ContactForm() {
                                     className="group relative px-8 py-3.5 bg-white text-[#030405] rounded-full font-sans text-sm font-bold overflow-hidden transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] disabled:opacity-30 disabled:hover:scale-100"
                                 >
                                     <span className="relative z-10 flex items-center gap-2">
-                                        Next Block <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                                        Next step <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                                     </span>
                                 </button>
                             </div>
@@ -483,7 +509,7 @@ export default function ContactForm() {
                                     className="group relative px-8 py-3.5 bg-white text-[#030405] rounded-full font-sans text-sm font-bold overflow-hidden transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] disabled:opacity-30 disabled:hover:scale-100"
                                 >
                                     <span className="relative z-10 flex items-center gap-2">
-                                        Final Step <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                                        Almost there <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                                     </span>
                                 </button>
                             </div>
@@ -494,7 +520,7 @@ export default function ContactForm() {
                     {step === 4 && (
                         <div className="flex flex-col gap-6 w-full">
                             <h2 className="text-3xl font-serif text-white tracking-tight leading-tight mb-2">
-                                Final Logistics.
+                                Final details.
                             </h2>
 
                             <div className="space-y-2">
@@ -591,7 +617,7 @@ export default function ContactForm() {
                                         className={`group relative px-8 py-4 rounded-full font-sans text-sm font-bold overflow-hidden transition-all duration-400 hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] disabled:opacity-50 disabled:hover:scale-100 ${error ? 'bg-white/5 border border-white/10 text-white hover:bg-white/10' : 'bg-signal text-black'}`}
                                     >
                                         <span className="relative z-10 flex items-center gap-2">
-                                            {isSubmitting ? "Transmitting..." : error ? "Retry Submission" : "Finish and book call"}
+                                            {isSubmitting ? "Coming right up..." : error ? "Try again" : "Finish and find a time"}
                                             {!isSubmitting && (error ? <RefreshCw size={16} /> : <CheckCircle2 size={16} className="group-hover:scale-110 transition-transform" />)}
                                         </span>
                                     </button>
@@ -608,30 +634,34 @@ export default function ContactForm() {
                             </div>
                             <div className="text-center space-y-4">
                                 <h2 className="text-4xl md:text-5xl font-serif text-white tracking-tight leading-tight">
-                                    Payload delivered.
+                                    All set!
                                 </h2>
                                 <p className="text-lg text-white/50 max-w-md mx-auto">
-                                    We&apos;ve received your specs, {formData.name.split(' ')[0]}. Skip the wait and secure your strategy session right now.
+                                    We&apos;ve got your info, {formData.firstName}. Let&apos;s pick a time to chat.
                                 </p>
                             </div>
 
-                            <a
-                                href="https://calendly.com/jacklindo31-fxmx/30min"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative px-10 py-5 bg-signal text-black rounded-full font-sans text-base font-bold overflow-hidden transition-all duration-400 hover:scale-[1.02] shadow-[0_0_30px_rgba(255,255,255,0.15)] flex items-center justify-center w-full max-w-sm mt-4"
-                            >
-                                <span className="relative z-10 flex items-center gap-3">
-                                    <Calendar size={18} /> Book Your Call Now
-                                </span>
-                                <div className="absolute inset-0 -translate-x-[150%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out" />
-                            </a>
+                            <div className="flex flex-col items-center gap-4 w-full max-w-sm mt-4">
+                                <Link
+                                    href={`/book?contactId=${contactId}&name=${encodeURIComponent(formData.firstName)}`}
+                                    className="group relative px-10 py-5 bg-signal text-black rounded-full font-sans text-base font-bold overflow-hidden transition-all duration-400 hover:scale-[1.02] shadow-[0_0_30px_rgba(255,255,255,0.15)] flex items-center justify-center w-full"
+                                >
+                                    <span className="relative z-10 flex items-center gap-3">
+                                        <Calendar size={18} /> Pick a time for our call
+                                    </span>
+                                    <div className="absolute inset-0 -translate-x-[150%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out" />
+                                </Link>
+                                
+                                <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.2em] animate-pulse">
+                                    Loading your options...
+                                </p>
+                            </div>
 
                             <Link
                                 href="/"
                                 className="mt-4 text-xs font-mono uppercase tracking-widest text-white/30 hover:text-white transition-colors"
                             >
-                                Return to Base
+                                Go back home
                             </Link>
                         </div>
                     )}
