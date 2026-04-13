@@ -124,7 +124,7 @@ export default function TrustLayer() {
                     <span className="w-1.5 h-1.5 bg-signal rounded-full shadow-[0_0_10px_rgba(255,255,255,0.8)]"></span>
                     Supported Ecosystems
                 </span>
-                <h2 className="trust-header-elem text-3xl md:text-5xl font-serif text-signal mb-16 md:mb-24">
+                <h2 className="trust-header-elem text-4xl md:text-5xl font-serif text-signal mb-16 md:mb-24">
                     Infinite <span className="metallic-gradient-text italic font-bold">integrations.</span>
                 </h2>
 
@@ -144,7 +144,7 @@ export default function TrustLayer() {
                 {/* Metrics Grid */}
                 <div className="metrics-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
                     {METRICS_DATA.map((mod) => (
-                        <div key={mod.id} className="trust-metric glass-panel p-8 md:p-10 rounded-sm border border-metallic/10 flex flex-col items-center text-center shadow-[0_15px_40px_-10px_rgba(0,0,0,0.6)] hover:border-metallic/30 transition-colors duration-500 transform-gpu">
+                        <div key={mod.id} className="trust-metric glass-panel p-6 md:p-10 rounded-sm border border-metallic/10 flex flex-col items-center text-center shadow-[0_15px_40px_-10px_rgba(0,0,0,0.6)] hover:border-metallic/30 transition-colors duration-500 transform-gpu">
                             <span className="font-mono text-xs text-metallic/60 uppercase tracking-widest mb-6 block">{mod.label}</span>
 
                             <div className="flex items-baseline gap-1 text-signal mb-4">

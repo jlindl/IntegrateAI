@@ -216,7 +216,7 @@ export default function ContactForm() {
             {/* Main Modal Container */}
             <div
                 ref={containerRef}
-                className="relative z-10 w-full max-w-3xl bg-[#0a0c0e]/80 backdrop-blur-2xl rounded-3xl p-8 md:p-14 border border-white/5 shadow-[0_0_80px_rgba(0,0,0,0.8)] min-h-[500px] flex flex-col"
+                className="relative z-10 w-full max-w-3xl bg-[#0a0c0e]/80 backdrop-blur-2xl rounded-3xl p-6 md:p-14 border border-white/5 shadow-[0_0_80px_rgba(0,0,0,0.8)] min-h-[500px] flex flex-col"
             >
                 {/* Progress Bar (Hidden on success) */}
                 {step < 5 && (

@@ -125,7 +125,7 @@ export default function AboutHero() {
                     </div>
 
                     {/* Headline */}
-                    <h1 className="about-hero-text text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-serif text-signal leading-tight lg:leading-[1.1] tracking-tight mb-6 max-w-5xl">
+                    <h1 className="about-hero-text text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif text-signal leading-[1.05] lg:leading-[1.1] tracking-tight mb-6 max-w-5xl">
                         We build the systems<br />
                         <span className="metallic-gradient-text italic font-bold">that build the future.</span>
                     </h1>

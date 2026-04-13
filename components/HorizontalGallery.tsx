@@ -66,8 +66,8 @@ export default function HorizontalGallery() {
                     trigger: containerRef.current,
                     pin: true,
                     scrub: 1, // Smooth scrubbing
-                    // The end defines how long the scroll takes. Making it wide based on sections length.
-                    end: () => `+=${scrollWrapperRef.current?.offsetWidth || 3000}`,
+                    // The end defines how long the scroll takes. Making it shorter on mobile to avoid user "fatigue".
+                    end: () => window.innerWidth < 768 ? "+=1800" : `+=${scrollWrapperRef.current?.offsetWidth || 3000}`,
                 }
             });
 

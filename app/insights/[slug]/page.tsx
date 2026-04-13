@@ -68,7 +68,7 @@ export default async function PostPage({ params }: PostPageProps) {
                         </div>
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl font-serif text-signal leading-[1.1] tracking-tight mb-8">
+                    <h1 className="text-5xl md:text-6xl font-serif text-signal leading-[1.05] tracking-tight mb-8">
                         {post.title}
                     </h1>
                     

@@ -121,7 +121,7 @@ export default function AboutMission() {
                             <span className="w-1.5 h-1.5 bg-signal rounded-full shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
                             The Origin
                         </span>
-                        <h2 className="mission-left-item text-3xl md:text-5xl font-serif text-signal leading-tight">
+                        <h2 className="mission-left-item text-4xl md:text-5xl font-serif text-signal leading-tight">
                             Born from <span className="metallic-gradient-text italic font-bold">obsession.</span>
                         </h2>
                         <p className="mission-left-item text-base md:text-lg text-metallic font-sans leading-relaxed max-w-lg">
@@ -137,7 +137,7 @@ export default function AboutMission() {
 
                     {/* Right: Manifesto */}
                     <div className="flex items-start pt-4">
-                        <p className="text-2xl md:text-4xl lg:text-5xl font-serif text-signal leading-[1.3] tracking-tight flex flex-wrap gap-x-[0.3em] gap-y-1">
+                        <p className="text-3xl md:text-4xl lg:text-5xl font-serif text-signal leading-[1.3] tracking-tight flex flex-wrap gap-x-[0.3em] gap-y-1">
                             {words.map((word, i) => (
                                 <span
                                     key={i}
@@ -153,7 +153,7 @@ export default function AboutMission() {
                 {/* Stats Row */}
                 <div className="mission-stats grid grid-cols-1 md:grid-cols-3 gap-6 mt-32 pt-16 border-t border-metallic/10">
                     {STATS.map((stat) => (
-                        <div key={stat.label} className="mission-stat-card glass-panel p-8 rounded-sm border border-metallic/10 text-center">
+                        <div key={stat.label} className="mission-stat-card glass-panel p-6 rounded-sm border border-metallic/10 text-center">
                             <span className="font-mono text-[10px] text-metallic/60 uppercase tracking-widest block mb-4">{stat.label}</span>
                             <div className="flex items-baseline justify-center gap-1">
                                 <span
