@@ -47,12 +47,29 @@ export default function PartnerForm() {
                 <p className="text-metallic leading-relaxed mb-8">
                     We&apos;ve received your agency details. A member of our partnership team will review your profile and reach out within 48 hours to discuss the next steps.
                 </p>
-                <button 
-                    onClick={() => setStatus("idle")}
-                    className="text-signal font-mono text-[10px] uppercase tracking-[0.3em] hover:opacity-80 transition-opacity"
-                >
-                    Submit Another Application
-                </button>
+                <div className="space-y-4">
+                    <p className="text-[10px] font-mono uppercase tracking-widest text-signal">Priority Step</p>
+                    <button 
+                        onClick={() => {
+                            const params = new URLSearchParams({
+                                firstName: formData.firstName,
+                                lastName: formData.lastName,
+                                email: formData.email,
+                                phone: formData.phone
+                            });
+                            window.location.href = `/book?${params.toString()}`;
+                        }}
+                        className="w-full px-8 py-4 bg-white text-[#030405] rounded-sm font-sans text-xs font-bold uppercase tracking-widest hover:scale-[1.02] transition-transform"
+                    >
+                        Book Intro Call
+                    </button>
+                    <button 
+                        onClick={() => setStatus("idle")}
+                        className="text-white/20 font-mono text-[9px] uppercase tracking-[0.3em] hover:text-white transition-colors block mx-auto pt-4"
+                    >
+                        Submit Another Application
+                    </button>
+                </div>
             </div>
         );
     }

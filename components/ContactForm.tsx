@@ -160,7 +160,14 @@ export default function ContactForm() {
                 setContactId(data.contactId);
                 // Optional: Short delay before redirect or show success then redirect
                 setTimeout(() => {
-                    router.push(`/book?contactId=${data.contactId}&name=${encodeURIComponent(formData.firstName)}`);
+                    const params = new URLSearchParams({
+                        contactId: data.contactId,
+                        firstName: formData.firstName,
+                        lastName: formData.lastName,
+                        email: formData.email,
+                        phone: formData.phone
+                    });
+                    router.push(`/book?${params.toString()}`);
                 }, 2500);
             }
             
