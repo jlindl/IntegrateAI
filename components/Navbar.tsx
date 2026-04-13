@@ -13,6 +13,7 @@ const NAV_LINKS = [
     { name: "About", href: "/about" },
     { name: "Case Studies", href: "/case-studies" },
     { name: "Insights", href: "/insights" },
+    { name: "Partners", href: "/partners" },
 ];
 
 export default function Navbar() {

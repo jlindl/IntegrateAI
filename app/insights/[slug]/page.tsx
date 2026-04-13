@@ -1,4 +1,5 @@
 import { getPostBySlug, getAllPosts } from "@/lib/blog";
+import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTAZone from "@/components/CTAZone";
@@ -18,6 +19,39 @@ export async function generateStaticParams() {
     return posts.map((post) => ({
         slug: post.slug,
     }));
+}
+
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const post = getPostBySlug(slug);
+
+    if (!post) return { title: "Post Not Found" };
+
+    return {
+        title: post.title,
+        description: post.excerpt,
+        openGraph: {
+            title: post.title,
+            description: post.excerpt,
+            type: "article",
+            publishedTime: post.date,
+            authors: ["Integrate Editorial"],
+            images: [
+                {
+                    url: post.image,
+                    width: 1200,
+                    height: 630,
+                    alt: post.title,
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: post.title,
+            description: post.excerpt,
+            images: [post.image],
+        },
+    };
 }
 
 export default async function PostPage({ params }: PostPageProps) {
@@ -123,6 +157,37 @@ export default async function PostPage({ params }: PostPageProps) {
                 <CTAZone />
                 <Footer />
             </div>
+
+            {/* Blog Posting Structured Data */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BlogPosting",
+                        "headline": post.title,
+                        "description": post.excerpt,
+                        "image": post.image,
+                        "datePublished": post.date,
+                        "author": {
+                            "@type": "Organization",
+                            "name": "Integrate"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "Integrate",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://integrate-tech.co.uk/logo.png"
+                            }
+                        },
+                        "mainEntityOfPage": {
+                            "@type": "WebPage",
+                            "@id": `https://integrate-tech.co.uk/insights/${post.slug}`
+                        }
+                    })
+                }}
+            />
         </main>
     );
 }
