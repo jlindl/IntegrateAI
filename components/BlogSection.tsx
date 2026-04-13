@@ -9,34 +9,13 @@ import { ArrowUpRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ARTICLES = [
-    {
-        id: "insight-01",
-        category: "Strategy",
-        title: "The Fallacy of 'Plug & Play' AI: Why Bespoke Architecture Wins",
-        excerpt: "Off-the-shelf tools fail when complexity scales. Discover why deeply integrated, custom AI systems are the only viable path to enterprise automation.",
-        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670&auto=format&fit=crop",
-        readTime: "6 Min Read"
-    },
-    {
-        id: "insight-02",
-        category: "Case Study",
-        title: "Automating Revenue: How 3 Enterprises Scaled with AI Agents",
-        excerpt: "An inside look at the exact autonomous architectures that eliminated manual CRM entry and accelerated sales cycles by 40%.",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
-        readTime: "8 Min Read"
-    },
-    {
-        id: "insight-03",
-        category: "Engineering",
-        title: "Beyond the LLM: Engineering Robust Multi-Agent Systems",
-        excerpt: "A technical deep dive into orchestration layers, structured outputs, and preventing hallucinations in mission-critical deployments.",
-        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2670&auto=format&fit=crop",
-        readTime: "12 Min Read"
-    }
-];
+import { BlogPost } from "@/lib/blog";
 
-export default function BlogSection() {
+interface BlogSectionProps {
+    posts: BlogPost[];
+}
+
+export default function BlogSection({ posts }: BlogSectionProps) {
     const sectionRef = useRef<HTMLElement>(null);
     const cardsRef = useRef<(HTMLAnchorElement | null)[]>([]);
 
@@ -88,9 +67,9 @@ export default function BlogSection() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
-                    {ARTICLES.map((article, index) => (
+                    {posts.map((article, index) => (
                         <Link 
-                            href="#" 
+                            href={`/insights/${article.slug}`} 
                             key={article.id}
                             ref={el => { cardsRef.current[index] = el }}
                             className="group relative flex flex-col h-full bg-[#0a0c0e]/80 border border-white/5 rounded-xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-white/20 hover:shadow-[0_10px_40px_rgba(0,0,0,0.5)] hover:-translate-y-2"
